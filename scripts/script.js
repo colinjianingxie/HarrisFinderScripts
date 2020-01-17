@@ -29,7 +29,8 @@ jQuery(document).ready(function() {
 
     */
     
-    
+    //good one
+    /*
     $("#exportpdf").click(function() {
 
 
@@ -72,6 +73,54 @@ jQuery(document).ready(function() {
                 pdf.save('output.pdf');
             }, margins);
     });
-    
-    
- });
+    */
+
+    $("#exportpdf").click(function() {
+       
+
+            var doc = new jsPDF('l', 'mm', "a0");
+
+            source = $('#editable-sample')[0];
+
+            /*
+            col: 0: uid
+            col: 1: url
+            col: 2: text
+            col: 3: money tag
+            col: 4: location tag
+            col: 5: org tag
+            col: 6: person tag
+            col: 7: comments
+            col: 8: edit
+            col: 9: delete
+            col: 10: favorite
+            */
+        
+            doc.autoTable({
+                html: '#editable-sample',
+                startY: false, 
+                theme: 'grid',  
+                tableWidth: 'auto', 
+                columnWidth: 'wrap', 
+                showHeader: 'everyPage',
+                tableLineColor: 200, 
+                tableLineWidth: 0,
+                columnStyles: {
+                0: {columnWidth: 15}, 1: {columnWidth: 75}, 2: {columnWidth: 'auto'}, 3: 
+                    {columnWidth: 50}, 4: {columnWidth: 50},
+                5: {columnWidth: 'auto'}, 6: {columnWidth: 50}, 7: {columnWidth: 'auto'}, 8: 
+                    {columnWidth: 10}, 9: {columnWidth: 10}, 10: {columnWidth: 10}
+                },
+                headerStyles: {theme: 'grid'},
+                styles: {overflow: 'linebreak', columnWidth: 'wrap',  
+                fontSize: 10, 
+                cellPadding: 8, overflowColumns: 'linebreak'},
+            });
+            doc.save('output.pdf');
+
+
+      
+
+    });
+
+});
